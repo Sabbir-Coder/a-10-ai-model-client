@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import AllModels from "../Pages/AllModels/AllModels";
-import Profile from "../Pages/Profile/Profile";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Registration";
 import PrivateRoute from "./PrivateRoute";
@@ -12,6 +11,7 @@ import UpdateModel from "../Pages/UpdateModel/UpdateModel";
 import MyModels from "../Pages/MyModels/MyModels";
 import MyPurchase from "../Pages/MyPurchase/MyPurchase";
 import ErrorPage from "../components/ErrorPage";
+import PurchasedDetails from "../components/PurchasedDetails";
 
 
 export const router = createBrowserRouter([
@@ -30,14 +30,7 @@ export const router = createBrowserRouter([
         element: <AllModels />,
         loader: () => fetch('http://localhost:3000/models')
       },
-      {
-        path: "/profile",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "/add-model",
         element: (
@@ -65,10 +58,18 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/my-purchase",
+        path: "/my-downloads",
         element: (
           <PrivateRoute>
             <MyPurchase />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-downloads-details/:id",
+        element: (
+          <PrivateRoute>
+            <PurchasedDetails />
           </PrivateRoute>
         ),
       },
@@ -85,15 +86,15 @@ export const router = createBrowserRouter([
       {
         path: "/auth/login",
         element:
-       
-            <Login />
+
+          <Login />
         ,
       },
       {
         path: "/auth/register",
-        element: 
+        element:
           <Register />
-       ,
+        ,
       },
     ],
   },

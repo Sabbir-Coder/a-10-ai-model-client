@@ -125,16 +125,12 @@ const NavBar = () => {
                 <li className="text-xs">{user.email}</li>
               </div>
 
-              <li className="mt-3">
-                <Link to={"/profile"}>
-                  <FaUser /> Profile
-                </Link>
-              </li>
+        
               <li>
                 <Link to={"/my-models"}>My Models</Link>
               </li>
               <li>
-                <Link to={"/my-purchase"}>My Model Purchase</Link>
+                <Link to={"/my-downloads"}>My Model Purchase</Link>
               </li>
 
               <li>

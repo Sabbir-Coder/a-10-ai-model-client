@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const PurchasedByCard = ({ model }) => {
     const { name, image, framework, useCase, dataset, purchased, description, _id, purchasedBy, createdBy } = model
-    console.log(model);
+    // console.log(model);
 
     return (
         <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
@@ -40,7 +40,16 @@ export const PurchasedByCard = ({ model }) => {
               {likes}
             </span> */}
                     </div>
-                    <Link to={_id ? `/model-details/${_id}` : '#'} className="btn rounded-full bg-linear-to-r from-[#1f4cad] to-[#3072ffd0] hover:from-[#3072FF] hover:to-[#3072FF] text-white w-full btn-sm">View</Link>
+
+
+                    <Link
+                        to={`/my-downloads-details/${_id}`}
+                        className="btn rounded-full bg-linear-to-r from-[#1f4cad] to-[#3072ffd0] hover:from-[#3072FF] hover:to-[#3072FF] text-white w-full btn-sm"
+                    >
+                        View
+                    </Link>
+
+
                 </div>
             </div>
         </div>

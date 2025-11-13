@@ -23,6 +23,8 @@ useEffect(() => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
+      
       if (data.success && data.result) {
         setModel(data.result);
       } else {
@@ -89,7 +91,7 @@ useEffect(() => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(finalModel),
+      body: JSON.stringify({...finalModel,downloadedBy: user.email}),
     })
       .then((res) => res.json())
       .then(() => {

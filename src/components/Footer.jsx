@@ -78,7 +78,7 @@ const Footer = () => {
 
       <div className="border-t lg:mb-0 md:mb-0 mb-20 border-[#3072FF] mt-8 pt-4 text-center">
         <p className="text-sm text-gray-300 dark:text-gray-200">
-          © {currentYear} 3D Model Hub Learn. All Rights Reserved.
+          © {currentYear} AI Model Learn. All Rights Reserved.
           <span className="ml-4">
             <Link to="/" className="hover:text-blue-400 mr-3">Privacy Policy</Link>
             <Link to="/" className="hover:text-blue-400">Terms of Service</Link>
