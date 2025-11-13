@@ -1,33 +1,35 @@
 import { use, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router";
+import { Link, useNavigate,  } from "react-router";
+import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 
 const ModelDetails = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+const { id } = useParams();
   const [model, setModel] = useState({});
   const [loading, setLoading] = useState(true);
   const { user } = use(AuthContext);
-  const [refetch, setRefetch] = useState(false)
+  const [refetch, setRefetch] = useState(false);
 
   useEffect(() => {
+      if (!id) return;
     fetch(`http://localhost:3000/models/${id}`, {
       headers: {
-        authorization: `Bearer ${user.accessToken}`,
+        authorization: `Bearer ${user?.accessToken}`,
       },
     })
       .then((res) => res.json())
       .then((data) => {
         setModel(data.result);
-        console.log(" Api called!")
-        console.log(data);
         setLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [user, id, refetch]);
 
   const handleDelete = () => {
+    if (user?.email !== model.createdBy) return; // extra safety
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -45,19 +47,15 @@ const ModelDetails = () => {
           },
         })
           .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
+          .then(() => {
             navigate("/all-models");
-
             Swal.fire({
               title: "Deleted!",
-              text: "Your file has been deleted.",
+              text: "Your model has been deleted.",
               icon: "success",
             });
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch((err) => console.log(err));
       }
     });
   };
@@ -70,21 +68,11 @@ const ModelDetails = () => {
       dataset: model.dataset,
       description: model.description,
       image: model.image,
-      createdBy: model.created_by,
+      createdBy: model.createdBy,
       purchasedBy: user.email,
       createdAt: new Date(),
       purchased: model.purchased,
     };
-
-    // "name": "Detectron2",
-    // "framework": "PyTorch",
-    // "useCase": "Object Detection",
-    // "dataset": "COCO",
-    // "description": "Modular object detection and segmentation framework developed by Meta AI, supporting Mask R-CNN and more.",
-    // "image": "https://i.ibb.co/Z6qg6xv/detectron2-model.png",
-    // "createdBy": "visionpro@example.com",
-    // "createdAt": "2025-11-02T11:00:00.000Z",
-    // "purchased": 28
 
     fetch(`http://localhost:3000/downloads/${model._id}`, {
       method: "POST",
@@ -94,21 +82,17 @@ const ModelDetails = () => {
       body: JSON.stringify(finalModel),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         toast.success("Successfully Purchased!");
-        setRefetch(!refetch)
-
-
+        setRefetch(!refetch);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => console.log(err));
   };
 
-  if (loading) {
-    return <div> Loading...</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+if (!model) return <div>Model not found!</div>;
+
+  const isCreator = user?.email === model.createdBy; // check if logged-in user is creator
 
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
@@ -131,7 +115,6 @@ const ModelDetails = () => {
               <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                 {model.framework}
               </div>
-
               <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                 Purchased: {model.purchased}
               </div>
@@ -141,7 +124,6 @@ const ModelDetails = () => {
               <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                 {model.dataset}
               </div>
-
               <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                 Use Case: {model.useCase}
               </div>
@@ -152,21 +134,36 @@ const ModelDetails = () => {
             </p>
 
             <div className="flex gap-3 mt-6">
+              {/* Update Button */}
               <Link
-                to={`/update-model/${model._id}`}
-                className="btn btn-primary rounded-full bg-linear-to-r from-pink-500 to-red-600 text-white border-0 hover:from-pink-600 hover:to-red-700"
+                to={isCreator ? `/update-model/${model._id}` : "#"}
+                className={`btn btn-primary rounded-full text-white border-0 ${
+                  isCreator
+                    ? "bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
+                    : "bg-gray-400 cursor-not-allowed"
+                }`}
+                onClick={(e) => !isCreator && e.preventDefault()}
               >
                 Update Model
               </Link>
+
+              {/* Purchase Button */}
               <button
                 onClick={handleDownload}
                 className="btn btn-secondary rounded-full"
               >
                 Purchase
               </button>
+
+              {/* Delete Button */}
               <button
                 onClick={handleDelete}
-                className="btn btn-outline rounded-full border-gray-300 hover:border-pink-500 hover:text-pink-600"
+                disabled={!isCreator}
+                className={`btn btn-outline rounded-full border-gray-300 ${
+                  isCreator
+                    ? "hover:border-pink-500 hover:text-pink-600"
+                    : "text-gray-400 border-gray-300 cursor-not-allowed"
+                }`}
               >
                 Delete
               </button>

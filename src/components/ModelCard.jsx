@@ -1,7 +1,7 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export const ModelCard = ({ model }) => {
-  const { name, image, framework, useCase, dataset, purchased, description, _id, purchasedBy ,createdBy} = model
+  const { name, image, framework, useCase, dataset, purchased, description, _id, createdBy} = model
   console.log(model);
   
   return (
@@ -21,9 +21,9 @@ export const ModelCard = ({ model }) => {
         </div>
         <div className="flex justify-between">    
              <div className="badge text-xs border border-blue-400 rounded-full">{dataset}</div>
-          <div className="badge text-xs border border-blue-400 rounded-full">UseCase: {useCase}</div></div>
-        <div className="text-xs text-secondary">{purchasedBy}</div>
-        <div className="text-xs text-secondary">{createdBy}</div>
+          </div>
+          <div className="badge text-xs border border-blue-400 rounded-full">UseCase: {useCase}</div>    
+        <div className="text-xs text-secondary">Created By: {createdBy}</div>
         <p className="line-clamp-1">
           {description}
         </p>

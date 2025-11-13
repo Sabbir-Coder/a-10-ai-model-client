@@ -83,8 +83,8 @@ const Navigate=useNavigate()
               <option value="" disabled>
                 Framework
               </option>
-              <option value="Vehicles">PyTorch</option>
-              <option value="Plants">TensorFlow</option>
+              <option value="Pytorch">PyTorch</option>
+              <option value="TensorFlow">TensorFlow</option>
    
             </select>
           </div>

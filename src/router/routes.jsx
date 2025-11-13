@@ -80,20 +80,20 @@ export const router = createBrowserRouter([
             <UpdateModel />
           </PrivateRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:3000/models/${params.id}`)
+        // loader: ({ params }) => fetch(`http://localhost:3000/models/${params.id}`)
       },
       {
         path: "/auth/login",
         element:
-          <PrivateRoute>
+       
             <Login />
-          </PrivateRoute>,
+        ,
       },
       {
         path: "/auth/register",
-        element: <PrivateRoute>
+        element: 
           <Register />
-        </PrivateRoute>,
+       ,
       },
     ],
   },
