@@ -13,20 +13,30 @@ const { id } = useParams();
   const { user } = use(AuthContext);
   const [refetch, setRefetch] = useState(false);
 
-  useEffect(() => {
-      if (!id) return;
-    fetch(`http://localhost:3000/models/${id}`, {
-      headers: {
-        authorization: `Bearer ${user?.accessToken}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
+useEffect(() => {
+  if (!id) return;
+
+  fetch(`http://localhost:3000/models/${id}`, {
+    headers: {
+      authorization: `Bearer ${user?.accessToken}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success && data.result) {
         setModel(data.result);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
-  }, [user, id, refetch]);
+      } else {
+        setModel(null); // explicitly set null if not found
+      }
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setModel(null);
+      setLoading(false);
+    });
+}, [user, id, refetch]);
+
 
   const handleDelete = () => {
     if (user?.email !== model.createdBy) return; // extra safety
@@ -89,8 +99,8 @@ const { id } = useParams();
       .catch((err) => console.log(err));
   };
 
-  if (loading) return <div>Loading...</div>;
-if (!model) return <div>Model not found!</div>;
+if (loading) return <div>Loading...</div>;
+if (!model) return <div>Model not found!</div>; // now it works
 
   const isCreator = user?.email === model.createdBy; // check if logged-in user is creator
 
