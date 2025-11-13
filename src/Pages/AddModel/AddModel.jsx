@@ -56,6 +56,7 @@ const AddModal = () => {
 
   return (
     <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
+      <title>Add Model</title>
       <div className="card-body p-6 relative">
      
      <div className="text-center text-5xl font-bold border-b-2 border-b-blue-400 mb-4 mx-auto pb-5">Add <span className="text-blue-800 font-black">Model</span> </div>

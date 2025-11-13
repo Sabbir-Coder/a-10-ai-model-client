@@ -29,7 +29,7 @@ const AllModels = () => {
 
   return (
     <div>
-    
+    <title>All Models</title>
       <div className="text-center text-5xl font-bold mt-5 border-b-2 border-b-blue-400 w-1/2 mb-1 mx-auto pb-5">All <span className="text-blue-800 font-black">Models</span> </div>
       <p className="text-center">Explore AI models.</p>
 
