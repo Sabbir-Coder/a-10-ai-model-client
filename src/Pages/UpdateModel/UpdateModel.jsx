@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
+import Loader from "../../components/Loader";
 
 const UpdateModel = () => {
   const { user } = useContext(AuthContext);
@@ -78,7 +79,7 @@ const UpdateModel = () => {
       });
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><Loader/></div>;
 
   return (
     <div className="card bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">

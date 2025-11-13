@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { PurchasedByCard } from "../../components/PurchasedByCard";
+import Loader from "../../components/Loader";
 
 
 const MyPurchase = () => {
@@ -28,7 +29,7 @@ const MyPurchase = () => {
   }, [user]);
 
   if (loading) {
-    return <div> Please wait ... Loading...</div>;
+    return <div> <Loader /></div>;
   }
 
   return (

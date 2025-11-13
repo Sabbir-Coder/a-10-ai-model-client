@@ -4,6 +4,10 @@ import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
+import Loader from "../../components/Loader";
+
+
+
 
 const ModelDetails = () => {
   const navigate = useNavigate();
@@ -101,7 +105,7 @@ const ModelDetails = () => {
       .catch((err) => console.log(err));
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><Loader /></div>;
   if (!model) return <div>Model not found!</div>; // now it works
 
   const isCreator = user?.email === model.createdBy; // check if logged-in user is creator
@@ -150,8 +154,8 @@ const ModelDetails = () => {
               <Link
                 to={isCreator ? `/update-model/${model._id}` : "#"}
                 className={`btn btn-primary rounded-full text-white border-0 ${isCreator
-                    ? "bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
-                    : "bg-gray-400 cursor-not-allowed"
+                  ? "bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
+                  : "bg-gray-400 cursor-not-allowed"
                   }`}
                 onClick={(e) => !isCreator && e.preventDefault()}
               >
@@ -171,8 +175,8 @@ const ModelDetails = () => {
                 onClick={handleDelete}
                 disabled={!isCreator}
                 className={`btn btn-outline rounded-full border-gray-300 ${isCreator
-                    ? "hover:border-pink-500 hover:text-pink-600"
-                    : "text-gray-400 border-gray-300 cursor-not-allowed"
+                  ? "hover:border-pink-500 hover:text-pink-600"
+                  : "text-gray-400 border-gray-300 cursor-not-allowed"
                   }`}
               >
                 Delete

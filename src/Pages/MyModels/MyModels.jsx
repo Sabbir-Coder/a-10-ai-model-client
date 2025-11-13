@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ModelCard } from "../../components/ModelCard";
+import Loader from "../../components/Loader";
 const MyModels = () => {
     const { user } = use(AuthContext)
     const [models, setModels] = useState([])
@@ -24,7 +25,7 @@ const MyModels = () => {
 
 
     if (loading) {
-        return <div> Please wait ... Loading...</div>
+        return <div> <Loader/></div>
     }
 
     return (
