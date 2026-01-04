@@ -15,8 +15,9 @@ import PurchasedDetails from "../components/PurchasedDetails";
 import Loader from "../components/Loader";
 import DashboardLayout from "../layout/DashboardLayout";
 
-
 import DashboardHome from "../Pages/Dashboard/DashboardHome";
+import ContactPage from "../Pages/ContactPage";
+
 
 
 export const router = createBrowserRouter([
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
         path: "/all-models",
         element: <AllModels />,
         loader: () => fetch('http://localhost:3000/models')
+      },
+      {
+        path: "/contact",
+        element: <ContactPage /> 
       },
       {
         path: "/model-details/:id",

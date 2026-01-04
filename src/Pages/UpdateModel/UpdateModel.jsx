@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../context/AuthContext";
 import Loader from "../../components/Loader";
+import SectionTitle from "../../components/SectionTitle";
+import { Link } from "react-router-dom";
 
 const UpdateModel = () => {
   const { user } = useContext(AuthContext);
@@ -81,86 +83,108 @@ const UpdateModel = () => {
 
   if (loading) return <div><Loader /></div>;
 
+  if (loading) return <div><Loader /></div>;
+
   return (
-    <div className="card bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
-      <title> Update Model</title>
-      <div className="card-body p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Update Model</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="label font-medium">Name</label>
-            <input
-              type="text"
-              name="name"
-              defaultValue={model.name}
-              required
-              className="input w-full rounded-full focus:outline-gray-200"
-            />
-          </div>
+    <div className="min-h-screen py-10 px-4 flex flex-col items-center justify-center">
+      <title>Update Model</title>
 
-          <div>
-            <label className="label font-medium">Framework</label>
-            <input
-              type="text"
-              name="framework"
-              defaultValue={model.framework}
-              required
-              className="input w-full rounded-full focus:outline-gray-200"
-            />
-          </div>
+      <SectionTitle title="Update" highlight="AI" suffix="Model" />
 
-          <div>
-            <label className="label font-medium">Use Case</label>
-            <input
-              type="text"
-              name="useCase"
-              defaultValue={model.useCase}
-              required
-              className="input w-full rounded-full focus:outline-gray-200"
-            />
-          </div>
+      <div className="card bg-[#1A0F2E]/80 backdrop-blur-xl border border-white/10 w-full max-w-2xl shadow-2xl rounded-3xl overflow-hidden">
+        <div className="card-body p-8 md:p-12">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="form-control space-y-2">
+                <label className="label-text text-gray-300 font-medium ml-1">Model Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  defaultValue={model.name}
+                  required
+                  placeholder="e.g. GPT-4o"
+                  className="input w-full bg-[#0F0716]/60 border border-white/10 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-hidden rounded-xl transition-all h-12"
+                />
+              </div>
 
-          <div>
-            <label className="label font-medium">Dataset</label>
-            <input
-              type="text"
-              name="dataset"
-              defaultValue={model.dataset}
-              required
-              className="input w-full rounded-full focus:outline-gray-200"
-            />
-          </div>
+              <div className="form-control space-y-2">
+                <label className="label-text text-gray-300 font-medium ml-1">Framework</label>
+                <input
+                  type="text"
+                  name="framework"
+                  defaultValue={model.framework}
+                  required
+                  placeholder="e.g. PyTorch"
+                  className="input w-full bg-[#0F0716]/60 border border-white/10 text-white placeholder-gray-500 focus:border-purple-500 focus:outline-hidden rounded-xl transition-all h-12"
+                />
+              </div>
 
-          <div>
-            <label className="label font-medium">Description</label>
-            <textarea
-              name="description"
-              defaultValue={model.description}
-              required
-              rows={5}
-              className="textarea w-full rounded-2xl focus:outline-gray-200"
-            ></textarea>
-          </div>
+              <div className="form-control space-y-2">
+                <label className="label-text text-gray-300 font-medium ml-1">Use Case</label>
+                <input
+                  type="text"
+                  name="useCase"
+                  defaultValue={model.useCase}
+                  required
+                  placeholder="e.g. NLP"
+                  className="input w-full bg-[#0F0716]/60 border border-white/10 text-white placeholder-gray-500 focus:border-pink-500 focus:outline-hidden rounded-xl transition-all h-12"
+                />
+              </div>
 
-          <div>
-            <label className="label font-medium">Thumbnail URL</label>
-            <input
-              type="url"
-              name="thumbnail"
-              defaultValue={model.image}
-              required
-              className="input w-full rounded-full focus:outline-gray-200"
-            />
-          </div>
+              <div className="form-control space-y-2">
+                <label className="label-text text-gray-300 font-medium ml-1">Dataset</label>
+                <input
+                  type="text"
+                  name="dataset"
+                  defaultValue={model.dataset}
+                  required
+                  placeholder="e.g. Common Crawl"
+                  className="input w-full bg-[#0F0716]/60 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-hidden rounded-xl transition-all h-12"
+                />
+              </div>
+            </div>
 
-          <button
-            type="submit"
-            className="btn w-full text-white mt-4 rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
-            disabled={!isCreator}
-          >
-            Update Model
-          </button>
-        </form>
+            <div className="form-control space-y-2">
+              <label className="label-text text-gray-300 font-medium ml-1">Thumbnail URL</label>
+              <input
+                type="url"
+                name="thumbnail"
+                defaultValue={model.image}
+                required
+                placeholder="https://example.com/image.png"
+                className="input w-full bg-[#0F0716]/60 border border-white/10 text-white placeholder-gray-500 focus:border-green-500 focus:outline-hidden rounded-xl transition-all h-12"
+              />
+            </div>
+
+            <div className="form-control space-y-2">
+              <label className="label-text text-gray-300 font-medium ml-1">Description</label>
+              <textarea
+                name="description"
+                defaultValue={model.description}
+                required
+                rows={5}
+                placeholder="Describe the model's capabilities..."
+                className="textarea w-full bg-[#0F0716]/60 border border-white/10 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-hidden rounded-xl transition-all text-base leading-relaxed"
+              ></textarea>
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              <Link
+                to="/dashboard/my-models"
+                className="btn flex-1 bg-white/5 hover:bg-white/10 text-white border-white/10 rounded-xl h-12 font-bold tracking-wide"
+              >
+                Cancel
+              </Link>
+              <button
+                type="submit"
+                className="btn flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white border-none rounded-xl h-12 font-bold tracking-wide shadow-lg hover:shadow-blue-500/25"
+                disabled={!isCreator}
+              >
+                Update Model
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

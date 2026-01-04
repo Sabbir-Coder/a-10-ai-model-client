@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const SectionTitle = ({ title, highlight, suffix }) => {
     return (
-        <div className="relative text-center mt-20 mb-16 px-4">
+        <div className="relative text-center mt-10 mb-16 px-4">
             {/* Main Title */}
             <motion.h2
                 initial={{ opacity: 0, y: 20 }}

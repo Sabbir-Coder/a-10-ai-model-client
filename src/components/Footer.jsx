@@ -1,73 +1,57 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import {
   Facebook,
   Instagram,
   Mail
 } from 'lucide-react';
 import { FaXTwitter } from "react-icons/fa6";
-
-import { MdOutlineModelTraining } from "react-icons/md";
 import Logo from './Logo';
-
-
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-
   return (
-    <footer className="bg-linear-to-r from-[#113686] to-[#3072ff] py-8 px-4  rounded-lg mt-20">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div>
-          <div className="flex items-center space-x-2 text-white">
-         <Logo/>
+    <footer className="bg-[#0F0716] border-t border-white/5 py-12 px-6 mt-0">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+        {/* Brand Section */}
+        <div className="space-y-4">
+          <div className="flex items-center space-x-2">
+            <Logo />
           </div>
-          <ul className="space-y-2 mt-4">
-            <li><Link to="/all-models" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">All Models</Link></li>
-            <li><Link to="/dashboard/add-model" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Add Model</Link></li>
-            <li><Link to="/profile" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Profile</Link></li>
-            <li><Link to="/auth/login" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Login</Link></li>
+          <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+            Empowering the next generation of AI innovation. Manage, share, and discover cutting-edge neural models with ease.
+          </p>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-lg font-bold mb-6 text-white font-display">Quick Links</h3>
+          <ul className="space-y-3">
+            <li><Link to="/" className="text-gray-400 hover:text-purple-400 transition-colors text-sm font-medium">Home</Link></li>
+            <li><Link to="/all-models" className="text-gray-400 hover:text-purple-400 transition-colors text-sm font-medium">All Models</Link></li>
+            <li><Link to="/contact" className="text-gray-400 hover:text-purple-400 transition-colors text-sm font-medium">Contact Support</Link></li>
+            <li><Link to="/dashboard" className="text-gray-400 hover:text-purple-400 transition-colors text-sm font-medium">Dashboard</Link></li>
           </ul>
         </div>
 
+        {/* Connect Section */}
         <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-gray-200">Resources</h3>
-          <ul className="space-y-2">
-            <li><Link to="/" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Learning Blog</Link></li>
-            <li><Link to="/" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Guides</Link></li>
-            <li><Link to="/" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Poly Tips</Link></li>
-            <li><Link to="/resources" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Resources</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-gray-200">Community</h3>
-          <ul className="space-y-2">
-            <li><Link to="/" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Discussion Forums</Link></li>
-            <li><Link to="/" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Study Groups</Link></li>
-            <li><Link to="/" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Events & Workshops</Link></li>
-            <li><Link to="/" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Leaderboard</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-lg font-bold mb-4 text-gray-900 dark:text-gray-200">Connect With Us</h3>
-          <div className="flex space-x-4 mb-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">
-              <Facebook size={24} />
+          <h3 className="text-lg font-bold mb-6 text-white font-display">Connect With Us</h3>
+          <div className="flex space-x-4 mb-6">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-blue-600 hover:text-white transition-all">
+              <Facebook size={20} />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">
-              <FaXTwitter size={24} />
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-all">
+              <FaXTwitter size={20} />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">
-              <Instagram size={24} />
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-pink-600 hover:text-white transition-all">
+              <Instagram size={20} />
             </a>
-
           </div>
           <div>
             <a
               href="mailto:support@aimodel.com"
-              className="flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"
+              className="flex items-center text-gray-400 hover:text-purple-400 transition-colors text-sm font-medium"
             >
               <Mail size={18} className="mr-2" /> support@aimodel.com
             </a>
@@ -75,15 +59,14 @@ const Footer = () => {
         </div>
       </div>
 
-
-      <div className="border-t lg:mb-0 md:mb-0 mb-20 border-[#3072FF] mt-8 pt-4 text-center">
-        <p className="text-sm text-gray-300 dark:text-gray-200">
-          © {currentYear} AI Model Learn. All Rights Reserved.
-          <span className="ml-4">
-            <Link to="/" className="hover:text-blue-400 mr-3">Privacy Policy</Link>
-            <Link to="/" className="hover:text-blue-400">Terms of Service</Link>
-          </span>
+      <div className="border-t border-white/5 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+        <p className="text-xs text-gray-500">
+          © {currentYear} AI Model Manager. All Rights Reserved.
         </p>
+        <div className="flex space-x-6">
+          <Link to="#" className="text-xs text-gray-500 hover:text-purple-400 transition-colors">Privacy Policy</Link>
+          <Link to="#" className="text-xs text-gray-500 hover:text-purple-400 transition-colors">Terms of Service</Link>
+        </div>
       </div>
     </footer>
   );

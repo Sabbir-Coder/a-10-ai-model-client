@@ -10,6 +10,7 @@ import { IoAddCircleSharp } from "react-icons/io5";
 
 import { use } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { MdDashboard } from "react-icons/md";
 
 const DashboardLayout = () => {
     const { user, signOutUser } = use(AuthContext);
@@ -82,6 +83,12 @@ const DashboardLayout = () => {
                             </Link>
                         </li>
 
+                        <li>
+                            <Link to="/dashboard" onClick={closeDrawer} className="flex items-center gap-3 py-3 px-4 hover:bg-white/5 active:bg-purple-900/30 rounded-lg hover:text-white transition-all group">
+                                <MdDashboard className="text-xl text-blue-400 group-hover:scale-110 transition-transform" />
+                                <span className="font-semibold tracking-wide">Dashboard</span>
+                            </Link>
+                        </li>
                         <li>
                             <Link to="/dashboard/add-model" onClick={closeDrawer} className="flex items-center gap-3 py-3 px-4 hover:bg-white/5 active:bg-purple-900/30 rounded-lg hover:text-white transition-all group">
                                 <IoAddCircleSharp className="text-xl text-blue-400 group-hover:scale-110 transition-transform" />
