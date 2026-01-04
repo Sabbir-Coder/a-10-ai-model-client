@@ -5,6 +5,7 @@ import AboutAi from "../../components/AboutAi";
 
 import GetStarted from "../../components/GetStarted";
 import SectionTitle from "../../components/SectionTitle";
+import Testimonials from "../../components/Testimonials";
 
 const Home = () => {
   const data = useLoaderData();
@@ -29,6 +30,7 @@ const Home = () => {
       </div>
 
       <AboutAi />
+      <Testimonials />
       <GetStarted />
     </div>
   );
