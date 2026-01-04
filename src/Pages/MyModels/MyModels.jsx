@@ -9,7 +9,7 @@ const MyModels = () => {
 
     useEffect(() => {
 
-        fetch(`https://a-10-ai-model-server.vercel.app/my-models?email=${user.email}`, {
+        fetch(`http://localhost:3000/my-models?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`
             }
@@ -25,13 +25,13 @@ const MyModels = () => {
 
 
     if (loading) {
-        return <div> <Loader/></div>
+        return <div> <Loader /></div>
     }
 
     return (
         <div>
             <title>My Model</title>
-             <div className="text-center text-5xl font-bold mt-5 border-b-2 border-b-blue-400 w-1/2 mb-11 mx-auto pb-5">My <span className="text-blue-800 font-black">Model</span> </div>
+            <div className="text-center text-5xl font-bold mt-5 border-b-2 border-b-blue-400 w-1/2 mb-11 mx-auto pb-5">My <span className="text-blue-800 font-black">Model</span> </div>
             <div className="grid grid-cols-3 lg:grid-cols-4 gap-3">
                 {models.map(model => <ModelCard key={model._id} model={model} />)}
             </div>

@@ -1,12 +1,13 @@
 import { Link } from 'react-router';
-import { 
-  Facebook,    
-  Instagram, 
-  Mail 
+import {
+  Facebook,
+  Instagram,
+  Mail
 } from 'lucide-react';
 import { FaXTwitter } from "react-icons/fa6";
 
 import { MdOutlineModelTraining } from "react-icons/md";
+import Logo from './Logo';
 
 
 
@@ -19,12 +20,11 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
         <div>
           <div className="flex items-center space-x-2 text-white">
-         <MdOutlineModelTraining size={25}/>
-      <span className="text-xl font-bold text-blue-300 dark:text-gray-200">AI Models</span>
-    </div>
+         <Logo/>
+          </div>
           <ul className="space-y-2 mt-4">
             <li><Link to="/all-models" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">All Models</Link></li>
-            <li><Link to="/add-model" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Add Model</Link></li>
+            <li><Link to="/dashboard/add-model" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Add Model</Link></li>
             <li><Link to="/profile" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Profile</Link></li>
             <li><Link to="/auth/login" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">Login</Link></li>
           </ul>
@@ -60,13 +60,13 @@ const Footer = () => {
               <FaXTwitter size={24} />
             </a>
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 dark:text-gray-200 hover:text-blue-400">
-              <Instagram  size={24} />
+              <Instagram size={24} />
             </a>
-          
+
           </div>
           <div>
-            <a 
-              href="mailto:support@aimodel.com" 
+            <a
+              href="mailto:support@aimodel.com"
               className="flex items-center text-gray-300 dark:text-gray-200 hover:text-blue-400"
             >
               <Mail size={18} className="mr-2" /> support@aimodel.com

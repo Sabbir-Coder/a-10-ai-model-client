@@ -12,90 +12,77 @@ import MyModels from "../Pages/MyModels/MyModels";
 import MyPurchase from "../Pages/MyPurchase/MyPurchase";
 import ErrorPage from "../components/ErrorPage";
 import PurchasedDetails from "../components/PurchasedDetails";
+import Loader from "../components/Loader";
+import DashboardLayout from "../layout/DashboardLayout";
+
+
+import DashboardHome from "../Pages/Dashboard/DashboardHome";
 
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    hydrateFallbackElement: <Loader />,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch('https://a-10-ai-model-server.vercel.app/latest-models')
+        loader: () => fetch('http://localhost:3000/latest-models')
       },
       {
         path: "/all-models",
         element: <AllModels />,
-        loader: () => fetch('https://a-10-ai-model-server.vercel.app/models')
-      },
-
-      {
-        path: "/add-model",
-        element: (
-          <PrivateRoute>
-            <AddModel />
-          </PrivateRoute>
-        ),
+        loader: () => fetch('http://localhost:3000/models')
       },
       {
         path: "/model-details/:id",
-        element: (
-          <PrivateRoute>
-            <ModelDetails />
-          </PrivateRoute>
-        ),
-      },
-
-      {
-        path: "/my-models",
-        element: (
-          <PrivateRoute>
-            <MyModels />
-          </PrivateRoute>
-        ),
-      },
-
-      {
-        path: "/my-downloads",
-        element: (
-          <PrivateRoute>
-            <MyPurchase />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/my-downloads-details/:id",
-        element: (
-          <PrivateRoute>
-            <PurchasedDetails />
-          </PrivateRoute>
-        ),
-      },
-
-      {
-        path: "/update-model/:id",
-        element: (
-          <PrivateRoute>
-            <UpdateModel />
-          </PrivateRoute>
-        ),
-        // loader: ({ params }) => fetch(`https://a-10-ai-model-server.vercel.app/models/${params.id}`)
+        element: <ModelDetails />,
       },
       {
         path: "/auth/login",
-        element:
-
-          <Login />
-        ,
+        element: <Login />,
       },
       {
         path: "/auth/register",
-        element:
-          <Register />
-        ,
+        element: <Register />,
       },
     ],
   },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <DashboardHome />,
+      },
+      {
+        path: "add-model",
+        element: <AddModel />,
+      },
+      {
+        path: "my-models",
+        element: <MyModels />,
+      },
+      {
+        path: "my-downloads",
+        element: <MyPurchase />,
+      },
+      {
+        path: "my-downloads-details/:id",
+        element: <PurchasedDetails />,
+      },
+      {
+        path: "update-model/:id",
+        element: <UpdateModel />,
+      },
+    ]
+  }
 ]);

@@ -20,28 +20,21 @@ const ModelDetails = () => {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`https://a-10-ai-model-server.vercel.app/models/${id}`, {
-      headers: {
-        authorization: `Bearer ${user?.accessToken}`,
-      },
-    })
+    fetch(`http://localhost:3000/models/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
-
         if (data.success && data.result) {
           setModel(data.result);
         } else {
-          setModel(null); // explicitly set null if not found
+          setModel(null);
         }
         setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
         setModel(null);
         setLoading(false);
       });
-  }, [user, id, refetch]);
+  }, [id, refetch]);
 
 
   const handleDelete = () => {
@@ -56,7 +49,7 @@ const ModelDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://a-10-ai-model-server.vercel.app/models/${model._id}`, {
+        fetch(`http://localhost:3000/models/${model._id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -77,6 +70,12 @@ const ModelDetails = () => {
   };
 
   const handleDownload = () => {
+    if (!user) {
+      toast.error("Please login to purchase!");
+      navigate("/auth/login");
+      return;
+    }
+
     const finalModel = {
       name: model.name,
       framework: model.framework,
@@ -90,7 +89,7 @@ const ModelDetails = () => {
       purchased: model.purchased,
     };
 
-    fetch(`https://a-10-ai-model-server.vercel.app/downloads/${model._id}`, {
+    fetch(`http://localhost:3000/downloads/${model._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -153,7 +152,7 @@ const ModelDetails = () => {
             <div className="flex gap-3 mt-6">
               {/* Update Button */}
               <Link
-                to={isCreator ? `/update-model/${model._id}` : "#"}
+                to={isCreator ? `/dashboard/update-model/${model._id}` : "#"}
                 className={`btn btn-primary rounded-full text-white border-0 ${isCreator
                   ? "bg-linear-to-r from-pink-500 to-red-600 hover:from-pink-600 hover:to-red-700"
                   : "bg-gray-400 cursor-not-allowed"

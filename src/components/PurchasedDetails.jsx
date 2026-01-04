@@ -15,7 +15,7 @@ const PurchasedDetails = () => {
 
   useEffect(() => {
 
-    fetch(`https://a-10-ai-model-server.vercel.app/downloads/${id}`, {
+    fetch(`http://localhost:3000/downloads/${id}`, {
       headers: {
         authorization: `Bearer ${user?.accessToken}`,
       },

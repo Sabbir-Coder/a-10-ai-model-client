@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 @import "tailwindcss";
+
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
 }
@@ -9,7 +10,7 @@
 
 
 * {
-    font-family: "Lora", serif;
+  font-family: "Lora", serif;
 }
 
 
@@ -28,4 +29,28 @@
   font-weight: bold;
   border-bottom: 3px solid #CAC8C8FF;
   background: rgb(243, 226, 226);
+}
+
+.bg-mesh {
+  background-color: #0F0716;
+  background-image:
+    radial-gradient(at 0% 0%, hsla(270, 90%, 20%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(290, 90%, 15%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(280, 90%, 10%, 1) 0, transparent 50%);
+}
+
+.triangle-shape {
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+.font-exo {
+  font-family: 'Exo 2', sans-serif;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.writing-vertical-rl {
+  writing-mode: vertical-rl;
 }

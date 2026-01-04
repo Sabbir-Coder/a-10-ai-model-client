@@ -14,7 +14,7 @@ const UpdateModel = () => {
   useEffect(() => {
     if (!user?.accessToken) return; // wait for user
 
-    fetch(`https://a-10-ai-model-server.vercel.app/models/${id}`, {
+    fetch(`http://localhost:3000/models/${id}`, {
       headers: {
         Authorization: `Bearer ${user.accessToken}`,
       },
@@ -57,7 +57,7 @@ const UpdateModel = () => {
       purchased: model.purchased || 0,
     };
 
-    fetch(`https://a-10-ai-model-server.vercel.app/models/${model._id}`, {
+    fetch(`http://localhost:3000/models/${model._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const UpdateModel = () => {
       });
   };
 
-  if (loading) return <div><Loader/></div>;
+  if (loading) return <div><Loader /></div>;
 
   return (
     <div className="card bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">

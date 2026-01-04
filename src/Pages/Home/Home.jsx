@@ -2,28 +2,29 @@ import { useLoaderData } from "react-router";
 import Banner from "../../components/Banner";
 import { ModelCard } from "../../components/ModelCard";
 import AboutAi from "../../components/AboutAi";
+
 import GetStarted from "../../components/GetStarted";
+import SectionTitle from "../../components/SectionTitle";
 
 const Home = () => {
   const data = useLoaderData();
-  console.log(data[0]);
+  data.forEach(item => console.log(item._id, item.createdAt));
 
   // Guaranteed sorting by newest
   const sortedData = [...data].sort((a, b) => {
-    const dateA = Date.parse(a.createdAt || a.created_at);
-    const dateB = Date.parse(b.createdAt || b.created_at);
-    return dateB - dateA;
+    const dateA = new Date(a.createdAt).getTime(); // converts to milliseconds
+    const dateB = new Date(b.createdAt).getTime();
+    return dateB - dateA; // newest first
   });
+
 
   return (
     <div>
       <Banner />
 
-      <div className="text-center text-5xl font-bold mt-15 border-b-2 border-b-blue-400 w-1/2 mb-11 mx-auto pb-5">
-        Featured <span className="text-blue-800 font-black">AI</span> Models
-      </div>
+      <SectionTitle title="Featured" highlight="AI" suffix="Models" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-18">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-18">
         {sortedData.map(model => <ModelCard key={model._id} model={model} />)}
       </div>
 
